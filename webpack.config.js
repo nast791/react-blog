@@ -111,8 +111,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "main-[hash:4].css"
     }),
-    // new CopyPlugin([
-    //   { from: 'static', to: '' },
-    // ])
+    new CopyPlugin([
+      { from: 'src/404.html', to: '' },
+    ])
   ]
 };
