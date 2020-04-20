@@ -1,9 +1,12 @@
 import React from 'react';
+import Container from "../../Reusable/Container/Container";
 
 const Home = props => {
   return (
     <React.Fragment>
-      <h1>Home</h1>
+      <Container>
+        <h1>Home</h1>
+      </Container>
     </React.Fragment>
   );
 };

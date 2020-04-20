@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
-import Home from "./components/Home/Home";
-import LK from "./components/LK/LK";
-import Editor from "./components/Editor/Editor";
-import Note from "./components/Note/Note";
+import Home from "./components/Disposable/Home/Home";
+import LK from "./components/Disposable/LK/LK";
+import Editor from "./components/Disposable/Editor/Editor";
+import Note from "./components/Disposable/Note/Note";
 
 const App = () => {
   return (
