@@ -3,7 +3,7 @@ import {ContainerBody} from './ContainerStyles';
 
 const Container = props => {
   return (
-    <ContainerBody>
+    <ContainerBody flex={props.flex}>
       {props.children}
     </ContainerBody>
   );
