@@ -1,12 +1,10 @@
 import React from 'react';
-import Container from "../../Reusable/Container/Container";
+import Header from "../../Reusable/Header/Header";
 
-const Home = props => {
+const Home = () => {
   return (
     <React.Fragment>
-      <Container>
-        <h1>Home</h1>
-      </Container>
+      <Header/>
     </React.Fragment>
   );
 };
