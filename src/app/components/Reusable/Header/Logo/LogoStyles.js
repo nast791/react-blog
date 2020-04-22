@@ -19,4 +19,5 @@ export const LogoBody = styled(NavLink)`
 
 export const LogoImage = styled.img`
   width: 30px;
+  min-width: 30px;
 `;

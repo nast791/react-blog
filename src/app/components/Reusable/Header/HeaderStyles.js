@@ -10,4 +10,13 @@ export const HeaderBody = styled.header`
   color: #444b54;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   z-index: 5;
+  
+  .popup-content {
+    position: relative;
+    max-width: 350px;
+    width: calc(100% - 60px) !important;
+    padding: 0 !important;
+    border-radius: 5px;
+    border: none !important;
+  }
 `;

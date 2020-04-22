@@ -1,10 +1,10 @@
 // TODO
-// базовые стили
+// базовые стили +
 // header
 // footer
 // navbar
-// popup регистрации
-// popup входа
+// popup регистрации Reactjs-popup
+// popup входа Reactjs-popup
 
 // главная - карточки
 // главная - поиск
