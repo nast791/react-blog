@@ -17,3 +17,23 @@ export const SearchInput = styled.input`
   background-size: 20px auto;
   background-position: 5px 50%;
 `;
+
+export const FormInput = styled.input`
+  width: 100%;
+  height: 40px;
+  margin-top: 15px;
+  padding: 0 20px;
+  border-radius: 5px;
+  border: 1px solid #444b54;
+  font-size: 15px;
+  
+  &:focus {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+`;
+
+export const InputError = styled.span`
+  display: inline-block;
+  font-size: 12px;
+  color: red;
+`;

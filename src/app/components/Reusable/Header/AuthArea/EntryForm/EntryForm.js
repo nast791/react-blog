@@ -1,12 +1,20 @@
 import React from 'react';
+import {Field, reduxForm} from 'redux-form';
+import Input from "../../../../UI/Input/Input";
+import {FormBody} from "../AuthChoice/AuthChoiceStyles";
+import Button from "../../../../UI/Button/Button";
+import {email, requiredInput} from "../../../../../validation/validation";
 
-const EntryForm = () => {
+const EntryForm = props => {
   return (
-    <div>
-      <div className="header"> Entry Title </div>
-      <div style={{minHeight: 500}} />
-    </div>
+    <FormBody onSubmit={props.handleSubmit} noValidate>
+      <Field name="email" component={Input} placeholder="E-mail" type="email" validate={[requiredInput, email]}/>
+      <Field name="password" component={Input} placeholder="Пароль" type="password" validate={[requiredInput]}/>
+      <Button disabled={!props.valid}>Войти</Button>
+    </FormBody>
   );
 };
 
-export default EntryForm;
+export default reduxForm({
+  form: 'entry'
+})(EntryForm);
