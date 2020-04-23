@@ -65,3 +65,7 @@ export const AuthChoiceTab = styled.button`
     }
   }
 `;
+
+export const FormBody = styled.form`
+  padding: 20px 20px 30px;
+`;

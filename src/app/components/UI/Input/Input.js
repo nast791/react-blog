@@ -1,19 +1,21 @@
 import React from 'react';
-import {InputBody, SearchInput} from "./InputStyles";
+import {FormInput, InputBody, InputError, SearchInput} from "./InputStyles";
 
 const Input = props => {
-  const inputType = props.type || 'text';
   const defaultProps = {
-    type: inputType,
+    type: props.type || 'text',
     placeholder: props.placeholder,
     name: props.name,
-    autoComplete: props.autocomplete
+    autoComplete: props.autocomplete || null
   };
 
   return (
     <InputBody>
-      { props.input === 'search' ? <SearchInput {...defaultProps}/> :
-        <SearchInput {...defaultProps}/> }
+      { props.input === 'search' ? <SearchInput {...defaultProps} {...props.input}/> :
+        <FormInput {...defaultProps} {...props.input}/> }
+
+      {props.meta && props.meta.error && props.meta.touched &&
+      <InputError>{props.meta.error}</InputError>}
     </InputBody>
   );
 };
