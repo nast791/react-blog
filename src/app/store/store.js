@@ -1,11 +1,13 @@
 import {createStore, applyMiddleware, combineReducers} from "redux";
 import thunk from 'redux-thunk';
-import authChoice from "./reducers/authChoice";
+import common from "./reducers/common";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {reducer as formReducer} from 'redux-form';
+import auth from "./reducers/auth";
 
 const reducers = {
-  authChoice,
+  common,
+  auth,
   form: formReducer
 };
 
