@@ -1,71 +1,31 @@
 import {AUTH_LOGOUT, AUTH_REFRESH, AUTH_REJECT, AUTH_SUCCESS} from "../../constants/actions";
+import {SIGN_KEY, URL_FIREBASE, URL_SIGN, EXPIRATION_DATE} from "../../constants/constants";
+import {sendByFetch} from "../../constants/functions";
 
 export function auth(email, password, isLogin, nickname = null, name = null) {
   return async dispatch => {
     try {
-      dispatch(refresh()); // сброс ошибок
-
-      const authData = { // данные, отправляемые на сервер
-        email, password,
-        returnSecureToken: true
-      };
+      const authData = {email, password, returnSecureToken: true}; // данные, отправляемые на сервер
 
       if (nickname) { // проверка никнейма на сервере
-        try {
-          const res = await fetch(`https://react-blog-332e0.firebaseio.com/users.json`).then(res => res.json());
-          const searchResult = Object.keys(res).filter(it => res[it].nickname === nickname);
-          if (searchResult.length > 0) {
-            dispatch(authReject('Этот никнейм уже занят'));
-            return;
-          }
-        } catch (e) {}
-      }
-
-      let url;
-      if (isLogin) { // url для входа или регистрации
-        url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCMJ3x1gkQI1p8DvSw52UsqO4pHra56UE4';
-      } else {
-        url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCMJ3x1gkQI1p8DvSw52UsqO4pHra56UE4';
-      }
-
-      const data = await fetch(url, { // вход или регистрация
-        method: 'POST',
-        body: JSON.stringify(authData),
-        headers: {
-          'Content-Type': 'application/json'
+        const res = await fetch(`${URL_FIREBASE}/users.json`).then(res => res.json());
+        const searchResult = Object.keys(res).filter(it => res[it].nickname === nickname);
+        if (searchResult.length > 0) {
+          dispatch(authReject('Этот никнейм уже занят'));
+          return;
         }
-      }).then(res => res.json());
-
-      if (!isLogin && nickname && name && !data.error) { // запись в БД данных пользователя, если это регистрация
-        const expirationDate = String(new Date(new Date().getTime() + data.expiresIn * 1000));
-        await fetch(`https://react-blog-332e0.firebaseio.com/users/${data.localId}.json`,
-        {
-          method: 'PUT',
-          body: JSON.stringify({nickname, name, expirationDate}),
-          headers: {'Content-Type': 'application/json'}
-        });
       }
 
-      const userInfo = await fetch(`https://react-blog-332e0.firebaseio.com/users/${data.localId}.json`).then(res => res.json()); // получаем данные пользователя
-
-      let userData = userInfo;
-      if (isLogin) {
-        const newExpirationDate = String(new Date(new Date().getTime() + 3600 * 1000));
-        userData = await fetch(`https://react-blog-332e0.firebaseio.com/users/${data.localId}.json`,
-        {
-          method: 'PUT',
-          body: JSON.stringify({...userInfo, expirationDate: newExpirationDate}),
-          headers: {'Content-Type': 'application/json'}
-        }).then((res) => res.json());
-      }
-
-      // Сократить код
-      // Время - год
-      // Выводить массив сообщений с ошибками
-      // Меню
-      // ЛК
+      const url = isLogin ? `${URL_SIGN}:signInWithPassword?key=${SIGN_KEY}` : `${URL_SIGN}:signUp?key=${SIGN_KEY}`;
+      const data = await sendByFetch('POST', url, authData); // вход или регистрация
 
       if (!data.error) {
+        const expirationDate = EXPIRATION_DATE;
+        // пробуем получить данные пользователя по localId, если их нет, userInfo = null, дальше обновляем данные
+        const userInfo = await fetch(`${URL_FIREBASE}/users/${data.localId}.json`).then(res => res.json());
+        const sendData = userInfo ? {...userInfo, expirationDate} : {nickname, name, expirationDate};
+        const userData = await sendByFetch('PUT', `${URL_FIREBASE}/users/${data.localId}.json`, sendData);
+
         localStorage.setItem('userId', data.localId);
         dispatch(authSuccess(data.localId, userData));
       } else {
@@ -80,16 +40,12 @@ export function auth(email, password, isLogin, nickname = null, name = null) {
 export function autoLogin(localId) {
   return async dispatch => {
     try {
-      const userInfo = await fetch(`https://react-blog-332e0.firebaseio.com/users/${localId}.json`).then(res => res.json()); // получаем данные пользователя
+      // получаем данные пользователя
+      const userInfo = await fetch(`${URL_FIREBASE}/users/${localId}.json`).then(res => res.json());
       const expirationDate = userInfo.expirationDate;
       if (new Date(expirationDate) >= new Date()) {
-        const newExpirationDate = String(new Date(new Date().getTime() + 3600 * 1000));
-        const newUserInfo = await fetch(`https://react-blog-332e0.firebaseio.com/users/${localId}.json`,
-          {
-            method: 'PUT',
-            body: JSON.stringify({...userInfo, expirationDate: newExpirationDate}),
-            headers: {'Content-Type': 'application/json'}
-          }).then((res) => res.json());
+        // перезаписываем время в БД
+        const newUserInfo = await sendByFetch('PUT', `${URL_FIREBASE}/users/${localId}.json`, {...userInfo, expirationDate: EXPIRATION_DATE});
         dispatch(authSuccess(localId, newUserInfo));
       } else {
         dispatch(logout());

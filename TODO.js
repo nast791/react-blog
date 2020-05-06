@@ -1,10 +1,10 @@
 // TODO
 // базовые стили +
-// header
-// footer
+// header +
 // navbar
-// popup регистрации Reactjs-popup
-// popup входа Reactjs-popup
+// popup регистрации Reactjs-popup +
+// popup входа Reactjs-popup +
+// массив сообщений с ошибками
 
 // главная - карточки
 // главная - поиск
@@ -18,3 +18,5 @@
 // новые комментарии
 // отслеживать комментарии?
 // закрыть комментарии
+
+// footer

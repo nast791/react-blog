@@ -15,15 +15,10 @@ const Layout = props => {
   );
 };
 
-function mapStateToProps(state) {
-  const {userInfo, token} = state.auth;
-  return {userInfo, token};
-}
-
 function mapDispatchToProps(dispatch) {
   return {
-    autoLogin: (token, expirationDate) => dispatch(autoLogin(token, expirationDate))
+    autoLogin: (localId) => dispatch(autoLogin(localId))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default connect(null, mapDispatchToProps)(Layout);
