@@ -3,7 +3,7 @@ import Popup from "reactjs-popup";
 import {AuthAreaBody, AuthAreaIcon, AuthAreaText} from "./AuthAreaStyles";
 import AuthChoice from "./AuthChoice/AuthChoice";
 import {connect} from "react-redux";
-import {isMountedPopup, setFormTab} from "../../../../store/actions/common";
+import {isMountedPopup} from "../../../../store/actions/common";
 import {logout} from "../../../../store/actions/auth";
 
 const AuthArea = props => {
@@ -17,9 +17,7 @@ const AuthArea = props => {
     <React.Fragment>
       { /* Не выполнен вход на аккаунт */
         !userId && props.mountedPopup ?
-        <Popup modal
-               trigger={<AuthAreaBody><AuthAreaIcon/><AuthAreaText>Войти</AuthAreaText></AuthAreaBody>}
-               onClose={props.setFormTab.bind(null, 'entry')}>
+        <Popup modal trigger={<AuthAreaBody><AuthAreaIcon/><AuthAreaText>Войти</AuthAreaText></AuthAreaBody>}>
           {close => <AuthChoice close={close}/>}
         </Popup>
         : null
@@ -40,7 +38,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setFormTab: (tabForm) => dispatch(setFormTab(tabForm)),
     isMountedPopup: (value) => dispatch(isMountedPopup(value)),
     logout: () => dispatch(logout())
   };

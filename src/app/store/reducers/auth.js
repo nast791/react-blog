@@ -1,10 +1,11 @@
-import {AUTH_LOGOUT, AUTH_REFRESH, AUTH_REJECT, AUTH_SUCCESS} from "../../constants/actions";
+import {AUTH_LOGOUT, AUTH_REFRESH, AUTH_REJECT, AUTH_SUCCESS, SET_TAB_FORM} from "../../utils/actions";
 
 const initialState = {
   userInfo: null,
   localId: null,
   error: null,
-  autoLogin: true
+  autoLogin: true,
+  tabForm: 'entry'
 };
 
 export default function auth(state = initialState, action) {
@@ -23,7 +24,11 @@ export default function auth(state = initialState, action) {
       };
     case AUTH_REFRESH:
       return {
-        ...state, error: null
+        ...state, error: null, tabForm: 'entry'
+      };
+    case SET_TAB_FORM:
+      return {
+        ...state, tabForm: action.tab
       };
     default:
       return state;

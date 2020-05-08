@@ -8,13 +8,13 @@ import {email, matchInput, password, requiredInput} from "../../../../../validat
 const RegistrationForm = props => {
   return (
     <FormBody onSubmit={props.handleSubmit} noValidate>
-      <Field name="setNickname" component={Input} placeholder="Никнейм" validate={[requiredInput]}/>
+      <Field name="setNickname" component={Input} placeholder="Уникальный никнейм" validate={[requiredInput]}/>
       <Field name="setUsername" component={Input} placeholder="Имя" validate={[requiredInput]}/>
       <Field name="setEmail" component={Input} placeholder="E-mail" type="email" validate={[requiredInput, email]}/>
       <Field name="setPassword" component={Input} placeholder="Пароль" type="password" validate={[requiredInput, password]}/>
       <Field name="setPasswordRepeat" component={Input} placeholder="Повторите пароль" type="password" validate={[requiredInput, matchInput]}/>
       <Button disabled={!props.valid}>Зарегистрироваться</Button>
-      {props.errorText ? <p>{props.errorText}</p> : null}
+      {props.errorText && props.errorNum > 3 ? <p>{props.errorText}</p> : null}
     </FormBody>
   );
 };

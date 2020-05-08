@@ -1,6 +1,7 @@
-import {AUTH_LOGOUT, AUTH_REFRESH, AUTH_REJECT, AUTH_SUCCESS} from "../../constants/actions";
-import {SIGN_KEY, URL_FIREBASE, URL_SIGN, EXPIRATION_DATE} from "../../constants/constants";
-import {sendByFetch} from "../../constants/functions";
+import {AUTH_LOGOUT, AUTH_REFRESH, AUTH_REJECT, AUTH_SUCCESS, SET_TAB_FORM} from "../../utils/actions";
+import {SIGN_KEY, URL_FIREBASE, URL_SIGN, EXPIRATION_DATE} from "../../utils/constants";
+import {sendByFetch} from "../../utils/functions";
+import {NICKNAME_ERROR, SERVER_ERROR, serverErrors} from "../../utils/errors";
 
 export function auth(email, password, isLogin, nickname = null, name = null) {
   return async dispatch => {
@@ -11,7 +12,7 @@ export function auth(email, password, isLogin, nickname = null, name = null) {
         const res = await fetch(`${URL_FIREBASE}/users.json`).then(res => res.json());
         const searchResult = Object.keys(res).filter(it => res[it].nickname === nickname);
         if (searchResult.length > 0) {
-          dispatch(authReject('Этот никнейм уже занят'));
+          dispatch(authReject(NICKNAME_ERROR, 5));
           return;
         }
       }
@@ -29,10 +30,11 @@ export function auth(email, password, isLogin, nickname = null, name = null) {
         localStorage.setItem('userId', data.localId);
         dispatch(authSuccess(data.localId, userData));
       } else {
-        dispatch(authReject(data.error.message));
+        const errors = serverErrors(data.error.message);
+        dispatch(authReject(errors[0], errors[1]));
       }
     } catch (e) {
-      console.log('Не удалось загрузить данные на сервер');
+      console.log(SERVER_ERROR);
     }
   }
 }
@@ -56,10 +58,10 @@ export function autoLogin(localId) {
   }
 }
 
-export function authReject(error) {
+export function authReject(message, number) {
   return {
     type: AUTH_REJECT,
-    error
+    error: {message, number}
   }
 }
 
@@ -80,5 +82,12 @@ export function logout() {
 export function refresh() {
   return {
     type: AUTH_REFRESH
+  }
+}
+
+export function setFormTab(tab) {
+  return {
+    type: SET_TAB_FORM,
+    tab
   }
 }

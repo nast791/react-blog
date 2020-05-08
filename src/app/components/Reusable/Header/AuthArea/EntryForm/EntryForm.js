@@ -11,6 +11,7 @@ const EntryForm = props => {
       <Field name="email" component={Input} placeholder="E-mail" type="email" validate={[requiredInput, email]}/>
       <Field name="password" component={Input} placeholder="Пароль" type="password" validate={[requiredInput, password]}/>
       <Button disabled={!props.valid}>Войти</Button>
+      {props.errorText && props.errorNum <= 3 ? <p>{props.errorText}</p> : null}
     </FormBody>
   );
 };

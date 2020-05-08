@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import mediaQueries from "../../../constants/mediaQueries";
+import mediaQueries from "../../../utils/mediaQueries";
 
 export const ErrorBody = styled.div`
   display: flex;
