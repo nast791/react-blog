@@ -4,3 +4,4 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_REJECT = 'AUTH_REJECT';
 export const AUTH_REFRESH = 'AUTH_REFRESH';
+export const TOGGLE_NAVBAR = 'TOGGLE_NAVBAR';

@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import Popup from "reactjs-popup";
-import {AuthAreaBody, AuthAreaIcon, AuthAreaText} from "./AuthAreaStyles";
+import {AuthAreaBody, AuthAreaIcon, AuthAreaText, AuthAreaUserAvatar, AuthAreaUserName} from "./AuthAreaStyles";
 import AuthChoice from "./AuthChoice/AuthChoice";
 import {connect} from "react-redux";
-import {isMountedPopup} from "../../../../store/actions/common";
-import {logout} from "../../../../store/actions/auth";
+import {isMountedPopup, toggleNavBar} from "../../../../store/actions/common";
+import NavBar from "./NavBar/NavBar";
+import {useClickAway} from "react-use";
 
 const AuthArea = props => {
   useEffect(() => {
@@ -12,6 +13,10 @@ const AuthArea = props => {
     return () => props.isMountedPopup(false);
   }, [props.autoLogin]);
   const userId = localStorage.getItem('userId');
+  const authAreaRef = useRef('');
+  useClickAway(authAreaRef, () => {
+    props.toggleNavBar(false);
+  });
 
   return (
     <React.Fragment>
@@ -24,22 +29,26 @@ const AuthArea = props => {
       }
       { /* Выполнен вход на аккаунт */
         props.localId ?
-        <AuthAreaBody><p>{props.userInfo.name}</p>&nbsp;<p onClick={props.logout}>Выйти</p></AuthAreaBody> : null
+        <AuthAreaBody onClick={() => props.toggleNavBar(!props.openNavBar)} data-active={props.openNavBar} ref={authAreaRef}>
+          <AuthAreaUserName>{props.userInfo.name}</AuthAreaUserName>
+          <AuthAreaUserAvatar/>
+          {props.openNavBar && <NavBar/>}
+        </AuthAreaBody> : null
       }
     </React.Fragment>
   );
 };
 
 function mapStateToProps(state) {
-  const {mountedPopup} = state.common;
+  const {mountedPopup, openNavBar} = state.common;
   const {userInfo, localId, autoLogin} = state.auth;
-  return {userInfo, localId, autoLogin, mountedPopup};
+  return {userInfo, localId, autoLogin, mountedPopup, openNavBar};
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     isMountedPopup: (value) => dispatch(isMountedPopup(value)),
-    logout: () => dispatch(logout())
+    toggleNavBar: (value) => dispatch(toggleNavBar(value)),
   };
 }
 

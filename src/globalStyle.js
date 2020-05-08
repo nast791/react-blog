@@ -58,7 +58,6 @@ const GlobalStyle = createGlobalStyle`
     display: block;
     max-width: 100%;
     height: auto;
-    border-style: none;
   }
 
   button {

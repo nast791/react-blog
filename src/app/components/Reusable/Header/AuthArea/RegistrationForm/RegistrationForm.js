@@ -1,9 +1,9 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import Input from "../../../../UI/Input/Input";
-import {FormBody} from "../AuthChoice/AuthChoiceStyles";
 import Button from "../../../../UI/Button/Button";
 import {email, matchInput, password, requiredInput} from "../../../../../validation/validation";
+import {FormBody, FormError} from "../AuthAreaFormStyles";
 
 const RegistrationForm = props => {
   return (
@@ -13,8 +13,8 @@ const RegistrationForm = props => {
       <Field name="setEmail" component={Input} placeholder="E-mail" type="email" validate={[requiredInput, email]}/>
       <Field name="setPassword" component={Input} placeholder="Пароль" type="password" validate={[requiredInput, password]}/>
       <Field name="setPasswordRepeat" component={Input} placeholder="Повторите пароль" type="password" validate={[requiredInput, matchInput]}/>
-      <Button disabled={!props.valid}>Зарегистрироваться</Button>
-      {props.errorText && props.errorNum > 3 ? <p>{props.errorText}</p> : null}
+      <Button disabled={!props.valid} data-type="submit">Зарегистрироваться</Button>
+      {props.errorText && props.errorNum > 3 ? <FormError>{props.errorText}</FormError> : null}
     </FormBody>
   );
 };

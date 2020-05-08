@@ -21,13 +21,17 @@ const AuthChoice = props => {
   };
 
   const clickEntryHandler = () => {
-    props.refresh();
-    props.setFormTab('entry');
+    if (props.tabForm !== 'entry') {
+      props.refresh();
+      props.setFormTab('entry');
+    }
   };
 
   const clickRegHandler = () => {
-    props.refresh();
-    props.setFormTab('reg');
+    if (props.tabForm !== 'reg') {
+      props.refresh();
+      props.setFormTab('reg');
+    }
   };
 
   return (

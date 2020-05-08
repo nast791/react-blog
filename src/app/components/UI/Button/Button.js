@@ -1,16 +1,16 @@
 import React from 'react';
-import {SubmitButton} from "./ButtonStyles";
+import {ButtonElement} from "./ButtonStyles";
 
 const Button = props => {
   const defaultProps = {
     type: props.type || 'submit',
-    disabled: props.disabled || null
+    disabled: props.disabled || null,
+    'data-type': props['data-type'] || 'base'
   };
 
   return (
     <React.Fragment>
-      { props.type === 'submit' ? <SubmitButton {...defaultProps}>{props.children}</SubmitButton> :
-        <SubmitButton {...defaultProps}>{props.children}</SubmitButton> }
+      <ButtonElement {...defaultProps}>{props.children}</ButtonElement>
     </React.Fragment>
   );
 };
