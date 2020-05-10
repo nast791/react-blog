@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import {NavLink} from "react-router-dom";
 
-export const NavBarBody = styled.nav`
+export const NavBarBody = styled.ul`
   position: absolute;
   content: "";
   top: calc(100% + 15px);
@@ -13,10 +14,19 @@ export const NavBarBody = styled.nav`
   border: 1px solid rgba(0,0,0,0.2);
 `;
 
-export const NavBarItem = styled.p`
-  padding: 10px 10px;
+export const NavBarItem = styled.li`
   font-size: 14px;
+`;
+
+export const NavBarLink = styled(NavLink)`
+  display: block;
+  padding: 10px 10px;
   
+  &.active {
+    color: darkgray;
+    cursor: default;
+  }
+ 
   &:hover {
     color: #000000;
     background-color: rgba(139, 220, 247, 0.3);

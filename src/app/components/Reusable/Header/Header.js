@@ -1,5 +1,5 @@
 import React from 'react';
-import {HeaderBody} from "./HeaderStyles";
+import {HeaderBody} from "./_Styles/HeaderStyles";
 import Container from "../Container/Container";
 import Logo from "./Logo/Logo";
 import Search from "./Search/Search";

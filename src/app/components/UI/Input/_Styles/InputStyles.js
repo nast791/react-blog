@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SearchIcon from "../../../../img/search.png";
+import SearchIcon from "../../../../../img/search.png";
 
 export const InputBody = styled.label``;
 

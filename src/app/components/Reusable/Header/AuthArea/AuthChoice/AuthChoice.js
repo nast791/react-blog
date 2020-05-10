@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import EntryForm from "../EntryForm/EntryForm";
-import {AuthChoiceCross, AuthChoiceTab, AuthChoiceTabs} from "./AuthChoiceStyles";
+import {AuthChoiceCross, AuthChoiceTab, AuthChoiceTabs} from "../../_Styles/AuthChoiceStyles";
 import {connect} from "react-redux";
 import {auth, refresh, setFormTab} from "../../../../../store/actions/auth";
 

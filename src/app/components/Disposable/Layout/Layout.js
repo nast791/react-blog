@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {LayoutBody} from "./LayoutStyles";
+import {LayoutBody} from "./_Styles/LayoutStyles";
 import {autoLogin} from "../../../store/actions/auth";
 import {connect} from "react-redux";
 

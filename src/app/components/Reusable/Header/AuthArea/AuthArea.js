@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import Popup from "reactjs-popup";
-import {AuthAreaBody, AuthAreaIcon, AuthAreaText, AuthAreaUserAvatar, AuthAreaUserName} from "./AuthAreaStyles";
+import {AuthAreaBody, AuthAreaIcon, AuthAreaText, AuthAreaUserAvatar, AuthAreaUserName} from "../_Styles/AuthAreaStyles";
 import AuthChoice from "./AuthChoice/AuthChoice";
 import {connect} from "react-redux";
 import {isMountedPopup, toggleNavBar} from "../../../../store/actions/common";

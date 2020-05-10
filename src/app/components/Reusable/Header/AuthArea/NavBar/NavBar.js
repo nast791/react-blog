@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {logout} from "../../../../../store/actions/auth";
-import {NavBarBody, NavBarItem} from "./NavBarStyles";
+import {NavBarBody, NavBarItem, NavBarLink} from "../../_Styles/NavBarStyles";
 
 const NavBar = props => {
   return (
     <NavBarBody>
-      <NavBarItem>Личный кабинет</NavBarItem>
-      <NavBarItem onClick={props.logout}>Выйти</NavBarItem>
+      <NavBarItem><NavBarLink to="/profile" exact>Профиль</NavBarLink></NavBarItem>
+      <NavBarItem onClick={props.logout}><NavBarLink as="a">Выйти</NavBarLink></NavBarItem>
     </NavBarBody>
   );
 };
