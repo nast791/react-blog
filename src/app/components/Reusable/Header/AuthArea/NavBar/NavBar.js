@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {logout} from "../../../../../store/actions/auth";
-import {NavBarBody, NavBarItem, NavBarLink} from "../../_Styles/NavBarStyles";
+import {NavBarBody, NavBarItem, NavBarLink} from "../../_Styles/NavBar";
 
 const NavBar = props => {
   return (

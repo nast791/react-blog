@@ -4,6 +4,7 @@ export const ButtonElement = styled.button`
   &[data-type='submit'] {
     width: 100%;
     height: 40px;
+    margin-left: auto;
     margin-top: 20px;
     border-radius: 5px;
     font-size: 15px;

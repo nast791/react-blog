@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from "../../Reusable/Header/Header";
 import UserData from "./UserData/UserData";
-import Avatar from "./Avatar/Avatar";
 import {ProfileBody} from "./_Styles/Profile";
 import Container from "../../Reusable/Container/Container";
 
@@ -10,8 +9,7 @@ const Profile = () => {
     <React.Fragment>
       <Header/>
       <ProfileBody>
-        <Container flex="flex">
-          <Avatar/>
+        <Container>
           <UserData/>
         </Container>
       </ProfileBody>

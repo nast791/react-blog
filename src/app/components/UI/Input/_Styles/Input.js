@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import SearchIcon from "../../../../../img/search.png";
 
-export const InputBody = styled.label``;
+export const InputBody = styled.div`
+  width: 100%;
+`;
 
 export const InputElement = styled.input`
   &[data-type='base'] {
@@ -29,6 +31,16 @@ export const InputElement = styled.input`
     background-image: url(${SearchIcon});
     background-size: 20px auto;
     background-position: 5px 50%;
+  }
+  
+  &[type='date'] {
+    text-transform:uppercase;
+  }
+  
+  &:disabled {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: gray;
   }
 `;
 

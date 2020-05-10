@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import Input from "../../../../UI/Input/Input";
 import Button from "../../../../UI/Button/Button";
 import {email, matchInput, password, requiredInput} from "../../../../../validation/validation";
-import {FormBody, FormError} from "../../_Styles/AuthAreaFormStyles";
+import {FormBody, FormError} from "../../_Styles/AuthAreaForms";
 
 const RegistrationForm = props => {
   return (

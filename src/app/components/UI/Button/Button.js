@@ -1,5 +1,5 @@
 import React from 'react';
-import {ButtonElement} from "./_Styles/ButtonStyles";
+import {ButtonElement} from "./_Styles/Button";
 
 const Button = props => {
   const defaultProps = {

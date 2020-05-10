@@ -1,7 +1,7 @@
 import React from 'react';
-import {InputBody, InputElement, InputError} from "./_Styles/InputStyles";
+import {InputBody, InputElement, InputError} from "./_Styles/Input";
 
-const Input = React.forwardRef((props, ref) => {
+const Input = props => {
   const defaultProps = {
     type: props.type || 'text',
     placeholder: props.placeholder,
@@ -9,19 +9,17 @@ const Input = React.forwardRef((props, ref) => {
     autoComplete: props.autocomplete,
     'data-type': props['data-type'] || 'base',
     multiple: props.multiple,
+    disabled: props.disabled
   };
 
   return (
     <InputBody>
-      { props['type'] === 'file' ?
-        <InputElement {...defaultProps} ref={ref} onChange={props.onChange}/>:
-        <InputElement {...defaultProps} {...props.input}/>
-      }
+      <InputElement {...defaultProps} {...props.input}/>
 
       {props.meta && props.meta.error && props.meta.touched &&
       <InputError>{props.meta.error}</InputError>}
     </InputBody>
   );
-});
+};
 
 export default Input;

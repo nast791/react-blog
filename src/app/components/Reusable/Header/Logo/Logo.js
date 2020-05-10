@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {LogoBody, LogoImage} from "../_Styles/LogoStyles";
+import {LogoBody, LogoImage} from "../_Styles/Logo";
 import ImageLogo from '../../../../../img/main-logo.png'
 
 const Logo = () => {
